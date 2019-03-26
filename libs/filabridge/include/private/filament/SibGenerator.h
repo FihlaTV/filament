@@ -59,7 +59,7 @@ inline constexpr uint8_t getSamplerBindingsStart(driver::Backend api) noexcept {
         case driver::Backend::VULKAN:
             // The Vulkan backend has single namespace for uniforms and samplers.
             // To avoid collision, the sampler bindings start after the last UBO binding.
-            return filament::BindingPoints::COUNT;
+            return CONFIG_UNIFORM_BINDING_COUNT;
 
         case driver::Backend::OPENGL:
         case driver::Backend::METAL:
