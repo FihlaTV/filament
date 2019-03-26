@@ -295,8 +295,10 @@ std::ostream& CodeGenerator::generateSamplers(
         char const* const typeName = getSamplerTypeName(type, info.format, info.multisample);
         char const* const precision = getPrecisionQualifier(info.precision, Precision::DEFAULT);
         if (mCodeGenTargetApi == TargetApi::VULKAN) {
+            // Note that the set specifier is not covered by the desktop GLSL spec, including recent
+            // versions. It is only documented in the GL_KHR_vulkan_glsl extension.
             const uint32_t bindingIndex = (uint32_t) firstBinding + info.offset;
-            out << "layout(binding = " << bindingIndex << ") ";
+            out << "layout(binding = " << bindingIndex << ", set = 1) ";
         }
         out << "uniform " << precision << " " << typeName << " " << uniformName.c_str();
         out << ";\n";
